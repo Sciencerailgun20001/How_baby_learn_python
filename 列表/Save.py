@@ -38,3 +38,4 @@ except IOError:
 finally:#使用finally语句可以避免在try中出现错误而不去执行将在执行try的最后执行finally 这样就不怕没关文件了
     man_file.close()
     other_file.close()
+    #在上传到github上的时候应该是文件有所修改——》在VSC中commit——》在VSC中push

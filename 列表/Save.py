@@ -30,7 +30,7 @@ try:
     other_file = open('other_data.txt','w')
     print(man,file = man_file)#使用print（）将指定的列表保存在指定的磁盘文件
     print(other,file = other_file)
-    # man_file.close()#不要忘了关闭文件，但是如果上面的代码出错了将会跳过这两行
+    # man_file.close()#不要忘了关闭文件，但是如果上面的代码出错了将会跳过这两行。
     # other_file.close()
 
 except IOError:

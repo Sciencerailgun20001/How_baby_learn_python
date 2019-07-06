@@ -27,15 +27,16 @@ except IOError:
     """
 try:
     man_file = open('man_data.txt','w')#打开文件赋值一个文件对象
-    other_file = open('other_data.txt','w')
+    other_file = open('other_data.txt','w')#读写模式:r只读,r+读写,w新建(会覆盖原有文件),a追加,b二进制文件.常用模式
     print(man,file = man_file)#使用print（）将指定的列表保存在指定的磁盘文件
     print(other,file = other_file)
     # man_file.close()#不要忘了关闭文件，但是如果上面的代码出错了将会跳过这两行。
     # other_file.close()
 
-except IOError:
-    print('file error')
+except IOError as err:
+    print('file error' + str(err))#强转err为字符类型
 finally:#使用finally语句可以避免在try中出现错误而不去执行将在执行try的最后执行finally 这样就不怕没关文件了
-    man_file.close()
-    other_file.close()
-    #在上传到github上的时候应该是文件有所修改——》在VSC中commit——》在VSC中push
+    if 'data' in locals():#添加判断语句
+        man_file.close()
+        other_file.close()
+        #在上传到github上的时候应该是文件有所修改——》在VSC中commit——》在VSC中push

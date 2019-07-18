@@ -1,4 +1,4 @@
-# MySql与python的联动用法（在py中实现操作数据库SQL篇）
+#  MySql与python的联动用法（在py中实现操作数据库SQL篇）
 
 ## 一 数据库操作
 

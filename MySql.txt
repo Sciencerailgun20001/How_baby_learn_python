@@ -1,0 +1,291 @@
+# MySql与python的联动用法（在py中实现操作数据库SQL篇）
+
+## 一 数据库操作
+
+### 1.查看数据库
+
+先来看看第一条最简单的数据库的查看命令：SHOW DATABASES;（在终端中启动数据库用到语句mysql -u root -p）
+所有mysql命令都需要有命令结束标识符，一般情况下是分号；
+
+![1563453660825](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563453660825.png)
+
+## 2.建立数据库
+
+建立数据库的命令是：CREATE DATABASE database_name;
+这里不要忘记分号结束；
+
+![1563453875683](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563453875683.png)
+
+## 3.删除数据库
+
+删除数据库的命令是：DROP DATABASE database_name;
+这里注意千万不要把系统数据库删除啦！！
+
+![1563454001505](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563454001505.png)
+
+## 4.打开数据库
+
+数据库新建完成后，要告诉数据库我正在对哪个数据库进行操作的命令是：
+      USE database_name;
+这样数据库就知道你要操作哪个数据库了
+
+![1563454192504](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563454192504.png)
+
+# 二 数据表操作
+
+## 1.操作数据表的命令
+
+| **命令**               | **说明**       |
+| ---------------------- | -------------- |
+| SHOW TABLES;           | 查看数据表     |
+| DESC table_name;       | 查看数据表结构 |
+| DROP table table_name; | 删除数据表     |
+
+## 2.新建数据表
+
+新建完数据库后，就是新建数据表了，新建数据表的语法是：
+
+CREATE   TABLE [ IF NOT EXISTS ]    `表名`   (
+
+
+​		`字段名1`   列类型 [ 属性 ]  [ 约束 ] [注释] ,
+​		`字段名2`   列类型 [ 属性 ]  [ 约束 ] [注释] ,
+​		… …
+​		`字段名n`   列类型 [ 属性 ]  [ 约束 ] [注释]
+
+
+)   [ 表字符集 ] [注释] ;
+
+![1563454652049](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563454652049.png)
+
+给MySQL表格添加属性和注释（添加到字段类型大小之后）
+
+![1563454730218](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563454730218.png)
+
+给MySQL表格添加属性和注释（添加到字段类型大小之后）
+
+![1563455396732](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563455396732.png)
+
+![1563455422888](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563455422888.png)
+
+![1563455494648](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563455494648.png)
+
+# 三 数据表约束处理
+
+## 1、创建约束
+
+​	创建表时添加
+​	创建表后追加：
+
+语法: ALERT TABLE 表名 ADD 约束类型（数据列名）
+
+![1563457571000](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563457571000.png)
+
+## 2、删除约束
+
+alter table 表名 drop 约束类型‘约束名'.
+
+![1563457603449](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563457603449.png)
+
+##3、查看约束
+
+​	SHOW    INDEX(或KEYS)  FROM  表名
+
+![1563457634675](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563457634675.png)
+
+# 四 MySQL中的修改表
+
+## 1.修改表
+
+修改表名
+
+ALTER TABLE 旧表名  RENAME AS  新表名 
+
+![1563457728901](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563457728901.png)
+
+添加字段
+
+ALTER TABLE 表名   ADD 字段名   列类型 [ 属性 ]
+
+![1563457779145](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563457779145.png)
+
+修改字段
+
+ALTER TABLE 表名   CHANGE 旧字段名  新字段名   列类型 [ 属性 ]
+
+![1563458429442](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563458429442.png)
+
+删除字段（【注】删除自动增长列；删除主键；删除列）
+
+ALTER TABLE 表名   DROP  字段名
+
+![1563458467267](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563458467267.png)
+
+# 数据表中的数据管理
+
+##一、数据表的增加数据
+
+我们在添加商品表数据前，先要有它的父表，也就是商品种类表的数据，这样子表才能正常添加数据！
+新增表数据的语法结构是：
+	INSERT INTO table_name (field1,field2...fieldn) VALUES (value1,value2...valuen);
+这里要注意列名要和表中的个列一一对应，顺序名称类型一个都不能错，后面的数据内容也是一样！创建表commoditytype
+
+![1563460653361](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460653361.png)
+
+增加下列数据：
+
+insert into commoditytype (ct_id,ct_name) values (1,'玩具');
+insert into commoditytype values (2,'文具');
+insert into commoditytype values (3,'书籍'),(4,'食物'),(5,'衣物’)；
+
+![1563460756680](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460756680.png)
+
+创建表commodity
+
+![1563460699206](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460699206.png)
+
+增加数据如下：
+
+insert into commodity (c_id ,c_name,c_madein,c_type,c_inprice,c_outprice,c_num) values (1,'变形金刚','美国',1,100,200,default);
+insert into commodity values (2,'红楼梦','中国',3,1000,1500,1000);
+insert into commodity values (3,'西游记','中国',3,500,600,30);
+insert into commodity values (4,'文具盒','日本',2,10,100,20);
+insert into commodity values (5,'铅笔','中国',2,1,2,1000000);
+insert into commodity values (6,'HADOOP权威指南','美国',3,149,199,default);
+insert into commodity values (7,'多啦A梦','日本',1,699,999,100);
+insert into commodity values (8,'Java编程思想','美国',3,100,null,1000);
+
+commodity表如下所示
+
+![1563460741511](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460741511.png)
+
+##二、数据表的删除数据
+
+如果我重复添加了一条商品记录，请问怎么删除它？
+这个简单，删除表记录的语法是：
+	DELETE FROM table_name WHERE CONDITION;
+这里千万注意：删除语句一定要写删除条件，否则整张表删除！！
+
+![1563460826803](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460826803.png)
+
+删除命令: delete from commodity where c_id=9;
+
+![1563460839394](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460839394.png)
+
+##三、数据表的清空表格数据
+
+TRUNCATE命令
+	用于完全清空表数据,但表结构、索引、约束等不变
+	语法：
+
+TRUNCATE [TABLE]    table_name
+
+注意：
+
+​	区别于DELETE命令
+​		相同：
+​			都能删除数据、不删除表结构，但TRUNCATE 速度更快
+​		不同：
+​			使用TRUNCATE TABLE重新设置AUTO_INCREMENT计数器
+​			使用TRUNCATE TABLE不会对事务有影响
+
+## 四、数据表的修改数据
+
+突然发现有个货厂商少给我一个，我要删除后重新添加吗？
+当然不用，你只要修改原来数据即可！语法如下：
+	UPDATE table_name SET field1=value1,field2=value2,...fieldn=valuen WHERE CONDITION;
+这里同样注意，field1，field2...  为要更改的数据列（字段名称）
+value  所要修改成的数据，可以为变量、具体值、表达式或者嵌套的SELECT结果
+CONDITION为筛选条件，如不指定则修改该表的所有列数据
+
+修改数据: update commodity set c_name='超人' where c_id=8；
+
+![1563460989699](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563460989699.png)
+
+## 五、数据表的单表查询
+
+### 用于检索数据表中符合条件的记录
+
+### 搜索条件可由一个或多个逻辑表达式组成，结果
+
+一般为真或假
+
+我们知道select *了，每次都是全部查询出来，我都是要在里面找我要的数据好烦，有没有办法只显示我要的那几列呢？
+其实查询语句的真正语法是：
+	SELECT field1,field2, ... ,fieldn FROM table_name;
+你只要将你想要查询的那些列名写出来就好了！
+
+![1563461108562](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563461108562.png)
+
+### 让我们来重新认识select语句中where的作用
+
+使用限制条件，数据库可以包含如下功能：
+带关系运算符和逻辑运算符的条件数据查询；
+带BETWEEN AND关键字的条件查询语句；若a范围在b与c之间则结果为真
+带IS NULL关键字的条件查询语句；若操作符为NULL,则结果为真
+带IS NOT NULL关键字的条件查询语句；若操作符不为NULL,则结果为真
+带IN关键字的条件查询语句；若a等于a1，a2„中的某一个，则结果为真
+带LIKE关键字的条件查询语句；SQL模式匹配，若a匹配b，则结果为真
+
+
+
+###带关系运算符和逻辑运算符的条件数据查询；
+
+| **算术运算符** | **描述** | **逻辑运算符** | **描述** |
+| -------------- | -------- | -------------- | -------- |
+| >              | 大于     | AND(&&)        | 逻辑与   |
+| <              | 小于     | OR(\|\|)       | 逻辑或   |
+| =              | 等于     | XOR            | 逻辑异或 |
+| !=(<>)         | 不等于   | NOT(!)         | 逻辑非   |
+| <=             | 小于等于 |                |          |
+| >=             | 大于等于 |                |          |
+
+###在WHERE子句中使用I进行范围查询
+语法：
+
+​	SELECT  字段列1，字段2 ,…FROM 表名 WHERE   字段x  IN  ( 值1,值2,值3…)
+
+查询的字段x的值，至少与括号中的一个值相同
+
+多个值之间用英文逗号隔开
+
+​	SELECT  *  FROM  commodity where    c_inprice = 100  OR c_inprice=110 OR
+
+​		c_inprice = 120;  #普通组处理方式
+
+SELECT  *  FROM  commodity where c_inprice IN ( 100, 110,120 );#使用IN进行查询
+
+​		方式，更为简洁，效率更高
+
+###在WHERE子句中，使用LIKE关键字进行模糊查询(通配符)
+
+与“%”一起使用，表示匹配0或任意多个字符
+与“_”一起使用，表示匹配单个字符
+
+![1563461403055](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563461403055.png)
+
+### order by查询
+
+有时候我的查询结果乱糟糟的，我想让它们按照某列进行排序，怎么做？
+排序的关键字是ORDER BY，后面跟ASC（升序，可以不写默认）或者DESC逆序；具体语法如下：
+	SELECT field1,field2,... FROM table_name ORDER BY fieldn [ACS|DESC];
+比如select * from commodity order by c_num;
+
+![1563461434349](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563461434349.png)
+
+### limit关键字查询
+
+有时候我们只想要排序后的第一条或前几条怎么办？
+可以用LIMIT关键字！
+LIMIT  [m,]n 或 LIMIT n OFFSET m
+限制SELECT返回结果的行数
+	m  制定第一个返回记录行的偏移量
+	n  制定返回记录行的最大数目
+注意
+	m不指定则偏移量为0，从第一条开始返回前n条记录
+	LIMIT  常用于分页显示
+举个例子吧：
+select * from commodity limit 5;  #返回前5条记录
+select * from commodity limit 5,3;#返回第6-第8条记录
+
+![1563461479160](C:\Users\w\AppData\Roaming\Typora\typora-user-images\1563461479160.png)

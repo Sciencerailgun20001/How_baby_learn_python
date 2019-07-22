@@ -1,5 +1,6 @@
 import  os
 import sys
+sys.setdefaultencoding('utf8')
 os.getcwd()
 os.chdir('D:\\git的东西\\How-baby-learn-python\\txt文件')#更改为指定的文件夹，注意每个文件夹之间要用\\隔开而不是\
 # try:
